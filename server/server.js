@@ -34,8 +34,6 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-
-
 app.listen(3333,() => {
 	console.log('http://localhost:3333');
 });

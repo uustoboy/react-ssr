@@ -30,13 +30,30 @@ const config = {
   plugins:[
     new HtmlWebpackPlugin({
       template: path.join(__dirname,'../client/template.html')
-    })
-  ]
+    }),
+     new webpack.HotModuleReplacementPlugin() 
+  ],
+  resolve: {
+      alias: {
+        'react-dom': '@hot-loader/react-dom'
+      }
+  }
 };
 
 if(isDev){
+
   config.devServer = {
-    host:
+    host: '0.0.0.0',
+    port: '8888',
+    contentBase: path.join(__dirname,'../dist/'),
+    hot: true,
+    overlay:{
+      errors: true
+    },
+    publicPath:'/',
+    historyApiFallback: {
+      index: "/index.html"
+    },
   }
 }
 
