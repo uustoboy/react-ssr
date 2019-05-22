@@ -14,13 +14,19 @@ let root = document.getElementById('root');
 // 	})
 // }
 
+
+
 const render = Component => {
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <AppContainer>
       <Component />
-    </AppContainer>,
-    document.getElementById('root')
-  );
+    </AppContainer>,root)
+  // ReactDOM.render(
+  //   <AppContainer>
+  //     <Component />
+  //   </AppContainer>,
+  //   root,
+  // );
 };
  
 render(App);
@@ -29,11 +35,10 @@ render(App);
 if (module.hot) {
   // keep in mind - here you are configuring HMR to accept CHILDREN MODULE
   // while `hot` would configure HMR for the CURRENT module
-  const NextApp = require('./App.jsx').default
-  module.hot.accept(NextApp, () => {
+  module.hot.accept('./App.jsx', () => {
     // if you are using harmony modules ({modules:false})
     render(App);
     // in all other cases - re-require App manually
-    render(NextApp);
+    render(require('./App.jsx').default );
   });
 }

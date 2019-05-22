@@ -1,8 +1,7 @@
 const path = require('path');
-const HtmlWebpackPlugin  = require('html-webpack-plugin')
-
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const isDev = process.env.NODE_ENV = 'development';
-
+const webpack = require('webpack');
 
 const config = {
   entry: {
@@ -30,18 +29,18 @@ const config = {
   plugins:[
     new HtmlWebpackPlugin({
       template: path.join(__dirname,'../client/template.html')
-    }),
-     new webpack.HotModuleReplacementPlugin() 
-  ],
-  resolve: {
-      alias: {
-        'react-dom': '@hot-loader/react-dom'
-      }
-  }
+    })
+  ]
 };
 
 if(isDev){
-
+  // config.entry = {
+  //   app: [
+  //     'react-hot-loader/patch',
+  //     path.join(__dirname,'../client/app.js')
+  //   ]
+  // }
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.devServer = {
     host: '0.0.0.0',
     port: '8888',
