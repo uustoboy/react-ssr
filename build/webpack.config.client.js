@@ -2,29 +2,17 @@ const path = require('path');
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const isDev = process.env.NODE_ENV = 'development';
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const baseConfig = require('./webpack.base.js');
 
-const config = {
+
+
+const config = webpackMerge(baseConfig, {
   entry: {
   	app: path.join(__dirname,'../client/app.js')
   },
   output: {
-    path: path.join(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    publicPath: ''
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: {
-            loader: 'babel-loader',
-            options: {
-             presets: ['@babel/preset-env']
-            }
-	      },
-        exclude: /(node_modules|bower_components)/,
-      }
-    ]
+    filename: '[name].[hash].js'
   },
   plugins:[
     new HtmlWebpackPlugin({
@@ -54,6 +42,6 @@ if(isDev){
       index: "/index.html"
     },
   }
-}
+})
 
 module.exports = config;

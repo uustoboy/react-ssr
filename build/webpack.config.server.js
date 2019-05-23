@@ -1,30 +1,16 @@
 const path = require('path');
+const webpackMerge = require('webpack-merge');
+const baseConfig = require('./webpack.base.js');
 
-const config = {
+const config = webpackMerge(baseConfig,{
   target: 'node',
   entry: {
   	app: path.join(__dirname,'../client/server-entry.js')
   },
   output: {
-    path: path.join(__dirname, '../dist'),
     filename: 'server-entry.js',
-    publicPath: '',
     libraryTarget: 'commonjs2'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: {
-            loader: 'babel-loader',
-            options: {
-             presets: ['@babel/preset-env']
-            }
-	      },
-        exclude: /(node_modules|bower_components)/,
-      }
-    ]
   }
-};
+});
 
 module.exports = config;

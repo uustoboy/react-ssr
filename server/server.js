@@ -7,7 +7,7 @@ const serverEntry = require('../dist/server-entry.js').default;
 let router = new Router();
 let fs = require('fs');
 let path = require('path');
-
+const favicon = require('serve-favicon')
 const isDev = process.env.NODE_ENV = 'development';
 
 // //设置静态资源的路径 
@@ -15,7 +15,7 @@ const isDev = process.env.NODE_ENV = 'development';
 // app.use(static(
 //   path.join( __dirname,  staticPath)
 // ))
-
+// app.use(favicon(path.join(__dirname, '../favicon.ico')))
 if(!isDev){
 	let template = fs.readFileSync(path.join(__dirname,'../dist/index.html'), 'utf8');
 	const staticPath = '../dist/';

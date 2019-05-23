@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'; // eslint-disable-line
 
 let root = document.getElementById('root');
 
@@ -16,7 +16,7 @@ let root = document.getElementById('root');
 
 
 
-const render = Component => {
+const render = (Component) => {
   ReactDOM.hydrate(
     <AppContainer>
       <Component />
